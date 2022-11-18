@@ -9,17 +9,12 @@ import 'package:test_app2/view/registration_view.dart';
 import '../components/app_button.dart';
 import '../components/app_textfield.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
-
-  @override
   Widget build(BuildContext context) {
+    print("REBUILD STATE");
     final blocAccount = BlocProvider.of(context)!.accountBloc;
 
     return Scaffold(

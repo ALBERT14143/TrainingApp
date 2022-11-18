@@ -1,6 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:test_app2/model/user.dart';
 import 'package:test_app2/provider/bloc_provider.dart';
 
 class HomeView extends StatelessWidget {
@@ -10,62 +12,39 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     print("State Rebuild");
     final testBloc = BlocProvider.of(context)!.testBloc;
+    final userBloc = BlocProvider.of(context)!.usersBloc;
     
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            StreamBuilder<String>(
-              initialData: "",
-              stream: testBloc.streamKahoys,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Text("${snapshot.data}", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24
-                  ),);
-                } else {
-                  return Text("walay data");
-                }
-              }
-            ),
-
-            StreamBuilder<String>(
-              initialData: "",
-              stream: testBloc.streamLubi,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Text("${snapshot.data}", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24
-                  ),);
-                } else {
-                  return Text("walay data");
-                }
-              }
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: (){
-                    testBloc.setKahoy();
-                  },
-                  child: Text("Kuhaon ni Paul ang kahoy."),
-                ),
-
-                ElevatedButton(
-                  onPressed: (){
-                    testBloc.setLubi();
-                  },
-                  child: Text("Kuhaon ni Renzo ang lubi."),
-                ),
-              ],
-            ),
-          ],
-        ),
+      appBar: AppBar(
+        title: Text("Users"),
+      ),
+      body: FutureBuilder<List<User>>(
+        future: userBloc.getUsers(),
+        builder: (context, fUserSnapshot) {
+          if (fUserSnapshot.hasData) {
+            var users = fUserSnapshot.data!;
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(users[index].fName!),
+                  subtitle: Text(users[index].email!),
+                );
+              },
+            );
+          } else if(fUserSnapshot.hasError) {
+            return Text(fUserSnapshot.error.toString());
+          } else {
+            return Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: Colors.black45,
+              child: SpinKitSpinningLines(
+                color: Colors.white,
+                size: 50.0,
+              ),
+            );
+          }
+        },
       ),
     );
   }

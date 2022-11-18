@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_app2/provider/bloc/account_bloc.dart';
 import 'package:test_app2/provider/bloc/test_bloc.dart';
+import 'package:test_app2/provider/bloc/users_bloc.dart';
 import 'package:test_app2/provider/bloc_provider.dart';
 import 'package:test_app2/view/home_view.dart';
 import 'package:test_app2/view/sample.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
+      usersBloc: UsersBloc(),
       accountBloc: AccountBloc(),
       testBloc: TestBloc(),
       child: MaterialApp(
