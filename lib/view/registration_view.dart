@@ -66,8 +66,29 @@ class RegistrationView extends StatelessWidget {
               child: AppButton(
                 title: "Register",
                 onpressed: () async {
-                  
-                  
+
+                  showDialog(
+                    context: context, 
+                    builder: (context) => Dialog(
+                      child: FutureBuilder<String>(
+                        future: regBloc.register(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return Text("OK");
+                          } else if(snapshot.hasError) {
+                            return Text("${snapshot.error}");
+                          } else {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                          // return Column(
+                          //   children: [
+                              
+                          //   ],
+                          // );
+                        }
+                      ),
+                    )
+                  );
                   Navigator.pop(context);
                 },
               ),
