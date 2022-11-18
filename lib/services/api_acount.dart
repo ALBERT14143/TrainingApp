@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:test_app2/model/dto_credentials.dart';
 
-class ApiRegistration{
+class ApiAccount{
   final Dio _dio = Dio(
     BaseOptions(
       baseUrl: "http://172.16.26.60/flutter-training/",
@@ -18,6 +18,22 @@ class ApiRegistration{
     final String path = "api/PersonalInfo/PostUser";
     try {
       final response = await _dio.post(path, data: dto.toJson());
+      return response.data.toString();
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<String> login(String username, String password) async {
+    final String path = "api/Account/Login";
+    Map<String, dynamic> credential = {
+      "Username": username,
+      "Password": password
+    };
+
+    try {
+      final response = await _dio.post(path, data: credential);
+      print(response.data.toString());
       return response.data.toString();
     } catch (e) {
       throw e;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_app2/provider/bloc/registration_bloc.dart';
+import 'package:test_app2/provider/bloc/account_bloc.dart';
 import 'package:test_app2/provider/bloc/test_bloc.dart';
 import 'package:test_app2/provider/bloc_provider.dart';
 import 'package:test_app2/view/home_view.dart';
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      registrationBloc: RegistrationBloc(),
+      accountBloc: AccountBloc(),
       testBloc: TestBloc(),
       child: MaterialApp(
         title: 'Flutter Demo',

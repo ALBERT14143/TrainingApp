@@ -6,7 +6,7 @@ import 'package:test_app2/components/app_textfield.dart';
 import 'package:test_app2/model/dto_credentials.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:test_app2/provider/bloc_provider.dart';
-import 'package:test_app2/services/api_registration.dart';
+import 'package:test_app2/services/api_acount.dart';
 
 import '../components/app_button.dart';
 
@@ -15,7 +15,7 @@ class RegistrationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final regBloc = BlocProvider.of(context)!.registrationBloc;
+    final regBloc = BlocProvider.of(context)!.accountBloc;
 
     return Scaffold(
       appBar: AppBar(
@@ -80,11 +80,7 @@ class RegistrationView extends StatelessWidget {
                           } else {
                             return Center(child: CircularProgressIndicator());
                           }
-                          // return Column(
-                          //   children: [
-                              
-                          //   ],
-                          // );
+                          //http://172.16.26.60/flutter-training/api/Account/Login
                         }
                       ),
                     )
