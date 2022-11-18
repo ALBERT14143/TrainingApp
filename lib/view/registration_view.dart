@@ -89,7 +89,7 @@ class RegistrationView extends StatelessWidget {
                       ),
                     )
                   );
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
                 },
               ),
             ),

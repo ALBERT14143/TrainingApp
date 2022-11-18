@@ -16,6 +16,7 @@ class RegistrationBloc{
   final TextEditingController passwordCtrlr = TextEditingController();
   
   Future<String> register() async {
+    await Future.delayed(Duration(seconds: 3));
     DtoCredentials _dto = DtoCredentials(
       fname: fnameCtrlr.text,
       mname: mnameCtrlr.text,
