@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app2/provider/bloc/registration_bloc.dart';
 import 'package:test_app2/provider/bloc/test_bloc.dart';
 import 'package:test_app2/provider/bloc_provider.dart';
 import 'package:test_app2/view/home_view.dart';
@@ -16,13 +17,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
+      registrationBloc: RegistrationBloc(),
       testBloc: TestBloc(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomeView(),
+        home: LoginView(),
       ),
     );
   }

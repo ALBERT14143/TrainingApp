@@ -46,22 +46,22 @@ class HomeView extends StatelessWidget {
                 }
               }
             ),
-            Row(
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
+                ElevatedButton(
                   onPressed: (){
                     testBloc.setKahoy();
-                    // increment();
-                  }, 
-                  icon: Icon(Icons.add)
+                  },
+                  child: Text("Kuhaon ni Paul ang kahoy."),
                 ),
 
-                IconButton(
+                ElevatedButton(
                   onPressed: (){
-                    // decrement();
-                  }, 
-                  icon: Icon(Icons.remove)
-                )
+                    testBloc.setLubi();
+                  },
+                  child: Text("Kuhaon ni Renzo ang lubi."),
+                ),
               ],
             ),
           ],
@@ -70,68 +70,3 @@ class HomeView extends StatelessWidget {
     );
   }
 }
-
-// class HomeView extends StatefulWidget{
-//   @override
-//   State<HomeView> createState() => _HomeViewState();
-// }
-
-// class _HomeViewState extends State<HomeView> {
-//   int num = 0;
-
-//   void increment() {
-//     setState(() {
-//       num++;
-//     });
-//   }
-
-//   void decrement() {
-//     setState(() {
-//       num--;
-//     });
-//   }
-
-
-//   @override
-//   Widget build(BuildContext context) {
-//     print("state rebuild");
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("My App"),
-//       ),
-//       body: Column(
-//         children: [
-//           Container(
-//             child: Text("You have pushed the button"),
-//           ),
-//           Text(num.toString()),
-//           Row(
-//             children: [
-//               IconButton(
-//                 onPressed: (){
-//                   increment();
-//                 }, 
-//                 icon: Icon(Icons.add)
-//               ),
-
-//               IconButton(
-//                 onPressed: (){
-//                   decrement();
-//                 }, 
-//                 icon: Icon(Icons.remove)
-//               )
-//             ],
-//           ),
-//         ],
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: () {
-//           setState(() {
-//             num++;
-//           });
-//           print(num);
-//         }
-//       ),
-//     );
-//   }
-// }
