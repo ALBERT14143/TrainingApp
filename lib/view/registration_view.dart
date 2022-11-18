@@ -6,11 +6,11 @@ import 'package:test_app2/components/app_textfield.dart';
 import 'package:test_app2/model/dto_credentials.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:test_app2/provider/bloc_provider.dart';
-import 'package:test_app2/services/api_acount.dart';
 
 import '../components/app_button.dart';
 
 class RegistrationView extends StatelessWidget {
+  static const id = "/registration";
   const RegistrationView({super.key});
 
   @override

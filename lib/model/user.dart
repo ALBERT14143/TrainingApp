@@ -25,7 +25,7 @@ class User {
     String? mName;
     String? lname;
     String? address;
-    dynamic birthDate;
+    String? birthDate;
     String? email;
     String? username;
     String? password;
@@ -38,7 +38,7 @@ class User {
         String? mName,
         String? lname,
         String? address,
-        dynamic birthDate,
+        String? birthDate,
         String? email,
         String? username,
         String? password,

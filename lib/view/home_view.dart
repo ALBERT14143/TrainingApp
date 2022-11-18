@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:test_app2/model/user.dart';
 import 'package:test_app2/provider/bloc_provider.dart';
+import 'package:test_app2/view/detail_view.dart';
 
 class HomeView extends StatelessWidget {
+  static const id = "/home";
   const HomeView({super.key});
 
   @override
@@ -18,16 +20,23 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: Text("Users"),
       ),
-      body: FutureBuilder<List<User>>(
+      body: FutureBuilder<dynamic>(
         future: userBloc.getUsers(),
         builder: (context, fUserSnapshot) {
           if (fUserSnapshot.hasData) {
-            var users = fUserSnapshot.data!;
+            var users = fUserSnapshot.data! as List;
+            // return Text(users.toString());
             return ListView.builder(
+              itemCount: users.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(users[index].fName!),
-                  subtitle: Text(users[index].email!),
+                  leading: CircleAvatar(),
+                  title: Text("${users[index]["fname"] ?? ""}"),
+                  subtitle: Text("${users[index]["lname"] ?? ""}"),
+                  onTap: () {
+                    userBloc.setUpdateUser(users[index]);
+                    Navigator.pushNamed(context, DetailsView.id);
+                  },
                 );
               },
             );

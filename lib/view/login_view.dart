@@ -10,6 +10,7 @@ import '../components/app_button.dart';
 import '../components/app_textfield.dart';
 
 class LoginView extends StatelessWidget {
+  static const id = "/login";
   const LoginView({super.key});
 
   @override
@@ -45,12 +46,10 @@ class LoginView extends StatelessWidget {
                     title: "Login",
                     onpressed: () async{
                       blocAccount.setLoading(true);
-                      await blocAccount.login().then((value) {
+                      await blocAccount.login().then((value) async {
+                        await blocAccount.setSharedAccount(value);
                         blocAccount.setLoading(false);
-                        Navigator.pushReplacement(
-                          context, 
-                          MaterialPageRoute(builder: (context) => HomeView())
-                        );
+                        Navigator.pushReplacementNamed(context, HomeView.id);
                       }, onError: (error) {
                         blocAccount.setLoading(false);
                         showDialog(
@@ -68,10 +67,7 @@ class LoginView extends StatelessWidget {
                   AppButton(
                     title: "Register",
                     onpressed: (){
-                      Navigator.push(
-                        context, 
-                        MaterialPageRoute(builder: (context) => RegistrationView())
-                      );
+                      Navigator.pushNamed(context, RegistrationView.id);
                     },
                   ),
                   

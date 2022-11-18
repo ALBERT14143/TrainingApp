@@ -1,13 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:test_app2/services/api_acount.dart';
+import 'package:test_app2/services/shared/share_accoun.dart';
 
 import '../../model/dto_credentials.dart';
+import '../../services/api/api_acount.dart';
 
 class AccountBloc{
 
   ApiAccount _apiAccount = ApiAccount();
+  SharedAccount sharedAccount = SharedAccount();
 
   final TextEditingController fnameCtrlr = TextEditingController();
   final TextEditingController mnameCtrlr = TextEditingController();
@@ -43,5 +45,14 @@ class AccountBloc{
 
   void setLoading(bool event) {
     sinkLoading.add(event);
+  }
+
+  Future<void> setSharedAccount(String userData) async {
+    await sharedAccount.setUserAccount(userData);
+  }
+
+  Future<bool> checkUserExist() async {
+    await Future.delayed(Duration(seconds: 3));
+    return await sharedAccount.checkUserExist();
   }
 }

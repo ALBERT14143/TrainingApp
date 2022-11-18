@@ -16,12 +16,31 @@ class ApiUsers{
     )
   );
 
-  Future<List<User>> getUsers() async {
+  Future<dynamic> getUsers() async {
     final path = "api/PersonalInfo/GetUser";
     try {
       final response = await _dio.get(path);
-      var data = jsonDecode(response.data) as List;
-      return data.map((e) => User.fromJson(e)).toList();
+      return response.data;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<String> updateUser(Map<String, dynamic> data) async {
+    final path = "api/PersonalInfo/UpdateUser";
+    try {
+      final response = await _dio.put(path, data: data);
+      return response.data.toString();
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<String> deleteUser(int recNo) async {
+    final path = "api/PersonalInfo/UpdateUser?recNo?=$recNo";
+    try {
+      final response = await _dio.delete(path);
+      return response.data.toString();
     } catch (e) {
       throw e;
     }
