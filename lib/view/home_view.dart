@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:test_app2/components/app_button.dart';
+import 'package:test_app2/components/app_constant.dart';
 import 'package:test_app2/model/user.dart';
 import 'package:test_app2/provider/bloc_provider.dart';
 import 'package:test_app2/view/detail_view.dart';
@@ -43,7 +44,7 @@ class HomeView extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
-                              fontSize: 24
+                              fontSize: 24,
                             ),
                           ),
                           SizedBox(height: 32),
@@ -92,7 +93,18 @@ class HomeView extends StatelessWidget {
               itemCount: users.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: CircleAvatar(),
+                  leading: Container(
+                    height: 80,
+                    width: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      border: Border.all(
+                        width: 1,
+                        color: Colors.green,
+                      )
+                    ),
+                    child: Image.asset(AppConstant.avatar,),
+                  ),
                   title: Text("${users[index]["fname"] ?? ""}"),
                   subtitle: Text("${users[index]["lname"] ?? ""}"),
                   onTap: () {
