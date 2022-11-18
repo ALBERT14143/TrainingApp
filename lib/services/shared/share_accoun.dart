@@ -11,4 +11,9 @@ class SharedAccount{
     final pref = await SharedPreferences.getInstance();
     return pref.containsKey(accountKey);
   }
+
+  Future<bool> removeUserAccount() async {
+    final pref = await SharedPreferences.getInstance();
+    return pref.remove(accountKey);
+  }
 }

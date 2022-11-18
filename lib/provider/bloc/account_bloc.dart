@@ -19,7 +19,7 @@ class AccountBloc{
   final TextEditingController usernameCtrlr = TextEditingController();
   final TextEditingController passwordCtrlr = TextEditingController();
 
-  final StreamController<bool> isLoadingCtrlr = StreamController<bool>();
+  final StreamController<bool> isLoadingCtrlr = StreamController<bool>.broadcast();
   Stream<bool> get streamLoading => isLoadingCtrlr.stream;
   Sink<bool> get sinkLoading => isLoadingCtrlr.sink;
   
@@ -54,5 +54,9 @@ class AccountBloc{
   Future<bool> checkUserExist() async {
     await Future.delayed(Duration(seconds: 3));
     return await sharedAccount.checkUserExist();
+  }
+
+  Future<bool> removeAccount() async {
+    return await sharedAccount.removeUserAccount();
   }
 }
