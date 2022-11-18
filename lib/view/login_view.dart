@@ -39,9 +39,6 @@ class _LoginViewState extends State<LoginView> {
               obscureText: true,
               preffix: Icon(Icons.key),
             ),
-            SizedBox(
-              height: 8,
-            ),
             AppButton(
               title: "Login",
               onpressed: (){

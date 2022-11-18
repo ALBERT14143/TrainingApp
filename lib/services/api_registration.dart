@@ -4,7 +4,7 @@ import 'package:test_app2/model/dto_credentials.dart';
 class ApiRegistration{
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: "http://192.168.8.113/flutter-training/",
+      baseUrl: "http://172.16.26.60/flutter-training/",
       connectTimeout: 1000 * 60,
       // headers: {
       //   "Access-Control-Allow-Origin": "*",

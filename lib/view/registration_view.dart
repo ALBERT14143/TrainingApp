@@ -39,86 +39,84 @@ class _RegistrationViewState extends State<RegistrationView> {
       ),
       body: Stack(
         children: [
-          Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      AppTextField(
-                        controller: fnameCtrlr, 
-                        hintText: "First name", 
-                        preffix: Icon(Icons.person)
-                      ),
-                      AppTextField(
-                        controller: mnameCtrlr, 
-                        hintText: "Middle name", 
-                        preffix: Icon(Icons.person)
-                      ),
-                      AppTextField(
-                        controller: lnameCtrlr, 
-                        hintText: "Last name", 
-                        preffix: Icon(Icons.person)
-                      ),
-                      AppTextField(
-                        controller: addressCtrlr, 
-                        hintText: "Address", 
-                        preffix: Icon(Icons.pin_drop_outlined)
-                      ),
-                      AppTextField(
-                        controller: emailCtrlr, 
-                        hintText: "Email", 
-                        preffix: Icon(Icons.alternate_email_outlined)
-                      ),
-                      AppTextField(
-                        controller: usernameCtrlr, 
-                        hintText: "Username", 
-                        preffix: Icon(Icons.person)
-                      ),
-                      AppTextField(
-                        controller: passwordCtrlr, 
-                        hintText: "Password",
-                        obscureText: true,
-                        preffix: Icon(Icons.key)
-                      ),
-                    ],
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                AppTextField(
+                  controller: fnameCtrlr, 
+                  hintText: "First name", 
+                  preffix: Icon(Icons.person)
+                ),
+                AppTextField(
+                  controller: mnameCtrlr, 
+                  hintText: "Middle name", 
+                  preffix: Icon(Icons.person)
+                ),
+                AppTextField(
+                  controller: lnameCtrlr, 
+                  hintText: "Last name", 
+                  preffix: Icon(Icons.person)
+                ),
+                AppTextField(
+                  controller: addressCtrlr, 
+                  hintText: "Address", 
+                  preffix: Icon(Icons.pin_drop_outlined)
+                ),
+                AppTextField(
+                  controller: emailCtrlr, 
+                  hintText: "Email", 
+                  preffix: Icon(Icons.alternate_email_outlined)
+                ),
+                AppTextField(
+                  controller: usernameCtrlr, 
+                  hintText: "Username", 
+                  preffix: Icon(Icons.person)
+                ),
+                AppTextField(
+                  controller: passwordCtrlr, 
+                  hintText: "Password",
+                  obscureText: true,
+                  preffix: Icon(Icons.key)
+                ),
+          
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: AppButton(
+                    title: "Register",
+                    onpressed: () async {
+                      print("Waiting");
+                      setState(() {
+                        isLoading = true;
+                      });
+                      // await Future.delayed(Duration(seconds: 5));
+                      DtoCredentials _dto = DtoCredentials(
+                        fname: fnameCtrlr.text,
+                        mname: mnameCtrlr.text,
+                        lname: lnameCtrlr.text,
+                        address: addressCtrlr.text,
+                        email: emailCtrlr.text,
+                        username: usernameCtrlr.text,
+                        password: passwordCtrlr.text
+                      );
+          
+                      await apiRegistration.register(_dto).then((value) {
+                        print(value.toString());
+                      }, onError: (error) {
+                        print(error.toString());
+                      });
+                      setState(() {
+                        isLoading = false;
+                      });
+                      Navigator.pop(context);
+                    },
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: AppButton(
-                  title: "Register",
-                  onpressed: () async {
-                    print("Waiting");
-                    setState(() {
-                      isLoading = true;
-                    });
-                    // await Future.delayed(Duration(seconds: 5));
-                    DtoCredentials _dto = DtoCredentials(
-                      fname: fnameCtrlr.text,
-                      mname: mnameCtrlr.text,
-                      lname: lnameCtrlr.text,
-                      address: addressCtrlr.text,
-                      email: emailCtrlr.text,
-                      username: usernameCtrlr.text,
-                      password: passwordCtrlr.text
-                    );
-
-                    await apiRegistration.register(_dto).then((value) {
-                      print(value.toString());
-                    }, onError: (error) {
-                      print(error.toString());
-                    });
-                    setState(() {
-                      isLoading = false;
-                    });
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
+
+          
+          
           isLoading! ? Container(
             height: double.infinity,
             width: double.infinity,
